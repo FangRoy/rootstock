@@ -2,13 +2,20 @@ __Predicting graft outcomes of the kidneys undergoing normothermic machine perfu
 
 __Abstract__
 
-__Objectives __A significant proportion of kidneys procured from deceased donors are discarded due to concerns of quality\. Normothermic machine perfusion \(NMP\) provides a platform to assess kidney quality prior to transplantation\. In this study NMP was used as an assessment tool to investigate the potential of discarded kidneys for transplantation\.
+__Objectives __A significant proportion of kidneys procured from deceased donors are discarded due to concerns of quality\.
+Normothermic machine perfusion \(NMP\) provides a platform to assess kidney quality prior to transplantation\.
+In this study NMP was used as an assessment tool to investigate the potential of discarded kidneys for transplantation\.
 
-__Methods __Data from 41 marginal donor kidneys undergoing NMP before transplantation were used to develop a support vector machine \(SVM\) prediction model based on donor characteristics and machine perfusion performance\. The SVM model was then applied to a series of 15 discarded kidneys undergoing NMP for experimental validation\.
+__Methods __Data from 41 marginal donor kidneys undergoing NMP before transplantation were used to develop a support vector machine \(SVM\) prediction model based on donor characteristics and machine perfusion performance\.
+The SVM model was then applied to a series of 15 discarded kidneys undergoing NMP for experimental validation\.
 
-__Results __In the training dataset, the SVM model revealed an accuracy of 94\.03% \(95% CI, 85\.41%\-98\.35%\), with a sensitivity of 100% and a specificity of 88\.24% in distinguishing between functioning and failed graft\. The ROC AUC was 0\.914 \(95% CI, 0\.82\-1\.00\)\. In the discarded kidney series, 10 kidneys were predicted to have a low probability of graft failure \(0\.16%\-11\.70%\), while 5 kidneys were predicted to have a high probability of graft failure \(16\.47%\-86\.73%\)\. Kidneys predicted to function showed superior glomerular filtration \[CrCl at 120min: 4\.4 \(3\.4\-4\.9\) versus 0\.6 \(0\.5\-0\.7\) ml/min/100g, p=0\.002\], better tubular transportation \[TNa at 120min: 557\.9 \(462\.9\-681\.7\) versus 68\.3 \(50\.3\-78\.1\) mmol/min/100g, p=0\.003\], and higher oxygen utilization efficiency \[TNa/VO2 at 120min: 212\.5 \(173\.1\-244\.9\) versus \(41\.9\) mmolNa/mlO2, p<0\.001\] compared to those predicted to fail\.
+__Results __In the training dataset, the SVM model revealed an accuracy of 94\.03% \(95% CI, 85\.41%\-98\.35%\), with a sensitivity of 100% and a specificity of 88\.24% in distinguishing between functioning and failed graft\.
+The ROC AUC was 0\.914 \(95% CI, 0\.82\-1\.00\)\.
+In the discarded kidney series, 10 kidneys were predicted to have a low probability of graft failure \(0\.16%\-11\.70%\), while 5 kidneys were predicted to have a high probability of graft failure \(16\.47%\-86\.73%\)\.
+Kidneys predicted to function showed superior glomerular filtration \[CrCl at 120min: 4\.4 \(3\.4\-4\.9\) versus 0\.6 \(0\.5\-0\.7\) ml/min/100g, p=0\.002\], better tubular transportation \[TNa at 120min: 557\.9 \(462\.9\-681\.7\) versus 68\.3 \(50\.3\-78\.1\) mmol/min/100g, p=0\.003\], and higher oxygen utilization efficiency \[TNa/VO2 at 120min: 212\.5 \(173\.1\-244\.9\) versus \(41\.9\) mmolNa/mlO2, p<0\.001\] compared to those predicted to fail\.
 
-__Conclusions __This study introduces an SVM model to predict posttransplant graft outcomes based on NMP performance\. Although none of the discarded kidneys were transplanted, the model suggests that 67% of the initially declined kidneys could be considered for transplantation\.
+__Conclusions __This study introduces an SVM model to predict posttransplant graft outcomes based on NMP performance\.
+Although none of the discarded kidneys were transplanted, the model suggests that 67% of the initially declined kidneys could be considered for transplantation\.
 
 __Keywords __
 
@@ -16,13 +23,19 @@ Graft survival, kidney transplantation, organ preservation, quality assessment\.
 
 __Introduction__
 
-Kidney transplantation is the preferred treatment for end stage renal disease \(ESRD\)\.1 Due to the organ shortage, marginal donor kidneys are increasingly being used to enlarge the donor pool\.2,3 Despite this effort, a significant proportion of these kidneys are discarded due to concerns of quality and adverse outcomes\.2,4 In the Netherlands, between 2015 and 2020, 402 \(34%\) kidneys from deceased donors were discarded based on subjectively assessed impaired organ quality\. Notably, 93 \(66%\) of the kidneys discarded due to acute kidney injury \(AKI\) were only in AKI stage I or II\.5
+Kidney transplantation is the preferred treatment for end stage renal disease \(ESRD\)\.1 Due to the organ shortage, marginal donor kidneys are increasingly being used to enlarge the donor pool\.2,3 Despite this effort, a significant proportion of these kidneys are discarded due to concerns of quality and adverse outcomes\.2,4 In the Netherlands, between 2015 and 2020, 402 \(34%\) kidneys from deceased donors were discarded based on subjectively assessed impaired organ quality\.
+Notably, 93 \(66%\) of the kidneys discarded due to acute kidney injury \(AKI\) were only in AKI stage I or II\.5
 
-Acceptable organ quality is the basis for achieving favorable transplant outcomes\. In the context of organ scarcity, it is crucial to improve the utilization of marginal donor kidneys by identifying those eligible for transplantation\. <a id="_Hlk175841597"></a>Normothermic machine perfusion \(NMP\), which simulates a physiological environment, has emerged as a promising platform for kidney quality assessment, particularly for evaluating marginal donor kidneys\. A previous study introduced an ex vivo kidney perfusion quality assessment score \(EVKP score\) that facilitated the successful transplantation of five initially declined kidneys based on macroscopic appearance, renal blood flow and urine output during NMP\.6,7 However, no studies have explored the potential of developing a prediction model for post\-transplant outcomes based on machine perfusion performance\.
+Acceptable organ quality is the basis for achieving favorable transplant outcomes\.
+In the context of organ scarcity, it is crucial to improve the utilization of marginal donor kidneys by identifying those eligible for transplantation\.
+<a id="_Hlk175841597"></a>Normothermic machine perfusion \(NMP\), which simulates a physiological environment, has emerged as a promising platform for kidney quality assessment, particularly for evaluating marginal donor kidneys\.
+A previous study introduced an ex vivo kidney perfusion quality assessment score \(EVKP score\) that facilitated the successful transplantation of five initially declined kidneys based on macroscopic appearance, renal blood flow and urine output during NMP\.6,7 However, no studies have explored the potential of developing a prediction model for post\-transplant outcomes based on machine perfusion performance\.
 
-Machine learning techniques are increasingly being applied to predict graft outcomes in kidney transplantation\.8\-11 Among these, Support Vector Machine \(SVM\) stands out for its ability to incorporate non\-vector inputs devoid of magnitude or orientation through the use of kernel functions\.12 SVM can estimate a hyperplane and determine a decision boundary that maximizes inter\-class margins, thereby ensuring precise classification\. This capability makes SVM effective in handling high\-dimensional datasets and performing non\-linear classification tasks\.
+Machine learning techniques are increasingly being applied to predict graft outcomes in kidney transplantation\.8\-11 Among these, Support Vector Machine \(SVM\) stands out for its ability to incorporate non\-vector inputs devoid of magnitude or orientation through the use of kernel functions\.12 SVM can estimate a hyperplane and determine a decision boundary that maximizes inter\-class margins, thereby ensuring precise classification\.
+This capability makes SVM effective in handling high\-dimensional datasets and performing non\-linear classification tasks\.
 
-To our knowledge, this is the first study developing an SVM model based on donor characteristics and kidney machine perfusion performance to predict graft outcomes for marginal kidneys\. Additionally, we applied this model to a series of discarded kidneys for experimental validation and to assess their potential for transplantation\.
+To our knowledge, this is the first study developing an SVM model based on donor characteristics and kidney machine perfusion performance to predict graft outcomes for marginal kidneys\.
+Additionally, we applied this model to a series of discarded kidneys for experimental validation and to assess their potential for transplantation\.
 
 __Materials and methods__
 
@@ -30,273 +43,515 @@ __Study cohort__
 
 This study consists of two cohorts, the clinical transplant series and discarded kidney series\.
 
-In the clinical transplant series, data from our clinical NMP program were used to develop the prediction model\.13 The kidneys included in this analysis were all from marginal donors—either donation after circulatory death \(DCD\) or donation after brain death \(DBD\) donors over 60 years old\. The donor kidneys were considered meeting the criteria for transplantation before NMP\. These kidneys underwent a 2\-hour NMP and then were transplanted\. Graft survival was followed up until August 2024\. Graft failure was defined as return to dialysis or retransplantation\.
+In the clinical transplant series, data from our clinical NMP program were used to develop the prediction model\.13 The kidneys included in this analysis were all from marginal donors—either donation after circulatory death \(DCD\) or donation after brain death \(DBD\) donors over 60 years old\.
+The donor kidneys were considered meeting the criteria for transplantation before NMP\.
+These kidneys underwent a 2\-hour NMP and then were transplanted\.
+Graft survival was followed up until August 2024\.
+Graft failure was defined as return to dialysis or retransplantation\.
 
-In the discarded kidney series, kidneys declined for transplantation within the Eurotransplant Kidney Allocation System \(ETKAS\) due to concerns of insufficient organ quality were allocated to our center for research purposes\. After standard back\-table benching, these kidneys underwent a 2\-hour NMP\. The previously developed prediction model was applied to these kidneys to evaluate the transplantability based on machine perfusion performance\. Renal function, injury, and histological changes were assessed for experimental validation\.
+In the discarded kidney series, kidneys declined for transplantation within the Eurotransplant Kidney Allocation System \(ETKAS\) due to concerns of insufficient organ quality were allocated to our center for research purposes\.
+After standard back\-table benching, these kidneys underwent a 2\-hour NMP\.
+The previously developed prediction model was applied to these kidneys to evaluate the transplantability based on machine perfusion performance\.
+Renal function, injury, and histological changes were assessed for experimental validation\.
 
 __Normothermic machine perfusion__
 
-In the clinical transplant series, kidneys were perfused using the Kidney Assist \(XVIVO, Groningen, the Netherlands\) under sterile conditions in the organ perfusion room\. In the discarded kidney series, kidneys were perfused in the laboratory using a similar NMP setup \(Harvard Apparatus®, Germany\) as previously described\.14 This setup operates on the same principle as the clinical one\.
+In the clinical transplant series, kidneys were perfused using the Kidney Assist \(XVIVO, Groningen, the Netherlands\) under sterile conditions in the organ perfusion room\.
+In the discarded kidney series, kidneys were perfused in the laboratory using a similar NMP setup \(Harvard Apparatus®, Germany\) as previously described\.14 This setup operates on the same principle as the clinical one\.
 
-In both series, kidneys were perfused with an oxygenated, red blood cell\-based solution at 37°C, with a controlled pressure of 70\-75 mmHg\. In the clinical series, cross\-matched red blood cells compatible with the donor were used as the oxygen carrier\. In the discarded kidney series, O\-negative red blood cells or those matching the donor’s blood group were used\. Additional creatinine \(90mg, Sigma\-Aldrich\) was added to the perfusate of discarded kidneys to assess the glomerular filtration rate\.
+In both series, kidneys were perfused with an oxygenated, red blood cell\-based solution at 37°C, with a controlled pressure of 70\-75 mmHg\.
+In the clinical series, cross\-matched red blood cells compatible with the donor were used as the oxygen carrier\.
+In the discarded kidney series, O\-negative red blood cells or those matching the donor’s blood group were used\.
+Additional creatinine \(90mg, Sigma\-Aldrich\) was added to the perfusate of discarded kidneys to assess the glomerular filtration rate\.
 
 __SVM model development__
 
-The SVM model was developed using donor characteristics and kidney perfusion metrics as predictors\. Specifically, donor age, urine protein creatinine ratio \(UPCR\), one\-hour renal blood flow \(RBF\), and one\-hour urine output were included as variables\. RBF and urine output were normalized to kidney weight, reported as milliliters per minute per 100 grams \(ml/min/100g\) and milliliters per 100 grams \(ml/100g\), respectively\.
+The SVM model was developed using donor characteristics and kidney perfusion metrics as predictors\.
+Specifically, donor age, urine protein creatinine ratio \(UPCR\), one\-hour renal blood flow \(RBF\), and one\-hour urine output were included as variables\.
+RBF and urine output were normalized to kidney weight, reported as milliliters per minute per 100 grams \(ml/min/100g\) and milliliters per 100 grams \(ml/100g\), respectively\.
 
-To address the imbalance in graft outcomes \(graft functioning versus graft failure\), random oversampling was applied to duplicate instances of the minority class \(graft failure\)\. This approach balanced the class distribution, enabling the SVM model trained on the oversampled dataset to provide more reliable predictions across both outcome classifications\.
+To address the imbalance in graft outcomes \(graft functioning versus graft failure\), random oversampling was applied to duplicate instances of the minority class \(graft failure\)\.
+This approach balanced the class distribution, enabling the SVM model trained on the oversampled dataset to provide more reliable predictions across both outcome classifications\.
 
-The SVM was implemented using a radial basis function kernel, allowing the model to handle data that is not linearly separable in its original space\. The regularization cost parameter was set to 1\. To reduce the risk of false positives—incorrectly predicting graft failure when the graft was functioning, the decision threshold was set at 0\.7\.
+The SVM was implemented using a radial basis function kernel, allowing the model to handle data that is not linearly separable in its original space\.
+The regularization cost parameter was set to 1\.
+To reduce the risk of false positives—incorrectly predicting graft failure when the graft was functioning, the decision threshold was set at 0\.7\.
 
 __Renal function and injury assessment__
 
-In the discarded human kidney series, RBF was recorded consistently, and urine output was measured hourly during NMP\. Perfusate and urine samples were collected at 30, 60 and 120 minutes for further analysis\. Oxygen consumption \(VO2\) was assessed through blood gas analyses\. Lactate dehydrogenase \(LDH\), aspartate aminotransferase \(AST\), creatinine and sodium concentrations were determined in the hospital biochemistry laboratory using standard clinical assays\. Creatinine clearance \(CrCl\), fractional excretion of sodium \(FENa\), and total sodium reabsorption \(TNa\) were calculated using the equations in Table S1\.
+In the discarded human kidney series, RBF was recorded consistently, and urine output was measured hourly during NMP\.
+Perfusate and urine samples were collected at 30, 60 and 120 minutes for further analysis\.
+Oxygen consumption \(VO2\) was assessed through blood gas analyses\.
+Lactate dehydrogenase \(LDH\), aspartate aminotransferase \(AST\), creatinine and sodium concentrations were determined in the hospital biochemistry laboratory using standard clinical assays\.
+Creatinine clearance \(CrCl\), fractional excretion of sodium \(FENa\), and total sodium reabsorption \(TNa\) were calculated using the equations in Table S1\.
 
 __Histopathology assessment__
 
-Renal cortex biopsies were taken from each kidney before NMP, fixed in 4% buffered paraformaldehyde, embedded in paraffin, and cut into 5µm sections\. Periodic acid\-Schiff \(PAS\) staining was used to evaluate interstitial fibrosis, tubular atrophy, arterial hyalinosis, arterial intimal thickening, and glomerulosclerosis by a renal pathologist \(M\.C\.v\.G\) blinded to the study\. Each type of lesion was scored from 0 \(none\) to 3 \(severe injury\) according to the Banff Classification of Allograft Pathology\.15
+<!--
+ERROR: the paragraph below could not be revised with the AI model due to the following error:
+
+The model `gpt-4-turbo` does not exist or you do not have access to it.
+-->
+Renal cortex biopsies were taken from each kidney before NMP, fixed in 4% buffered paraformaldehyde, embedded in paraffin, and cut into 5µm sections\.
+Periodic acid\-Schiff \(PAS\) staining was used to evaluate interstitial fibrosis, tubular atrophy, arterial hyalinosis, arterial intimal thickening, and glomerulosclerosis by a renal pathologist \(M\.C\.v\.G\) blinded to the study\.
+Each type of lesion was scored from 0 \(none\) to 3 \(severe injury\) according to the Banff Classification of Allograft Pathology\.15
 
 __Statistical analysis__
 
-Data were reported as median with interquartile range \(IQR\) for continuous variables and numbers and percentages for categorical variables\. SVM Model's effectiveness was assessed through a confusion matrix and the area under the receiver operating characteristic \(ROC\) curve \(AUC\)\. We calculated accuracy, positive predictive value \(PPV\), negative predictive value \(NPV\), sensitivity, specificity and F1 score based on the matrix\. Two\-way ANOVA was used to compare renal function and viability markers in the discarded kidney series\. Fixed effects were time, group factor, and the interaction of the group factor with time\. Individual kidneys were considered as random effects\. A Geisser–Greenhouse correction and a restricted maximum likelihood approach were used\. We used R \(version 4\.2\.2, R Core Team\) and GraphPad Prism \(version 9\.3\.1, GraphPad Software\) for statistical analysis and data presentation\.
+
+Data were reported as median with interquartile range \(IQR\) for continuous variables and numbers and percentages for categorical variables\.
+SVM Model's effectiveness was assessed through a confusion matrix and the area under the receiver operating characteristic \(ROC\) curve \(AUC\)\.
+We calculated accuracy, positive predictive value \(PPV\), negative predictive value \(NPV\), sensitivity, specificity and F1 score based on the matrix\.
+Two\-way ANOVA was used to compare renal function and viability markers in the discarded kidney series\.
+Fixed effects were time, group factor, and the interaction of the group factor with time\.
+Individual kidneys were considered as random effects\.
+A Geisser–Greenhouse correction and a restricted maximum likelihood approach were used\.
+We used R \(version 4\.2\.2, R Core Team\) and GraphPad Prism \(version 9\.3\.1, GraphPad Software\) for statistical analysis and data presentation\.
 
 __Results__
 
 __Baseline characteristics__
 
-In the clinical transplant cohort, 41 <a id="_Hlk175843158"></a>deceased\-donor kidneys eligible for our clinical NMP program were included between May 2021 and April 2024\. Patient demographics and perfusion metrics are presented in Table 1\. All kidneys underwent 2\-hour NMP and then were transplanted by a consistent transplant team\. The median follow\-up time for patients and grafts was 1\.1 years \(IQR, 0\.5\-2\.0\)\. There were 23 cases of delayed graft function \(DGF\) and 4 cases of primary non\-function \(PNF\)\. By the end of follow\-up, 7 grafts had failed due to rejection \(n = 3\), sepsis \(n = 2\), renal artery anastomotic stenosis \(n = 1\), and glomerular sclerosis \(n = 1\)\.
+In the clinical transplant cohort, 41 <a id="_Hlk175843158"></a>deceased\-donor kidneys eligible for our clinical NMP program were included between May 2021 and April 2024\.
+Patient demographics and perfusion metrics are presented in Table 1\.
+All kidneys underwent 2\-hour NMP and then were transplanted by a consistent transplant team\.
+The median follow\-up time for patients and grafts was 1\.1 years \(IQR, 0\.5\-2\.0\)\.
+There were 23 cases of delayed graft function \(DGF\) and 4 cases of primary non\-function \(PNF\)\.
+By the end of follow\-up, 7 grafts had failed due to rejection \(n = 3\), sepsis \(n = 2\), renal artery anastomotic stenosis \(n = 1\), and glomerular sclerosis \(n = 1\)\.
 
-In the discarded kidney cohort, 15 kidneys declined for transplantation due to concerns of acute kidney injury \(AKI\) were offered to our center for research between March 2023 and March 2024\. Donor characteristics are presented in Table 2\. The median donor age was 63 \(IQR, 47\-73\) years, with 7 DCD donors, and 8 DBD donors\. Terminal serum creatinine levels was 140 \(91\-162\) μmol/l\. UPCR was 47\.6 \(34\.6\-77\.7\) mg/mmol\. The kidneys were classified as AKI stage I \(n=8\), II \(n=6\), and III \(n=1\)\. The warm ischemia time \(WIT\) for DCD donors was 18 \(15\-21\) minutes, and cold ischemia time \(CIT\) was 12\.7 \(9\.3\-23\.8\) hours\.
+In the discarded kidney cohort, 15 kidneys declined for transplantation due to concerns of acute kidney injury \(AKI\) were offered to our center for research between March 2023 and March 2024\.
+Donor characteristics are presented in Table 2\.
+The median donor age was 63 \(IQR, 47\-73\) years, with 7 DCD donors, and 8 DBD donors\.
+Terminal serum creatinine levels was 140 \(91\-162\) μmol/l\.
+UPCR was 47\.6 \(34\.6\-77\.7\) mg/mmol\.
+The kidneys were classified as AKI stage I \(n=8\), II \(n=6\), and III \(n=1\)\.
+The warm ischemia time \(WIT\) for DCD donors was 18 \(15\-21\) minutes, and cold ischemia time \(CIT\) was 12\.7 \(9\.3\-23\.8\) hours\.
 
 __SVM model development__
 
-The transplant cohort was <a id="_Hlk175844248"></a><a id="_Hlk175844391"></a>oversampled to create a dataset comprised 34 instances of functioning graft and 33 instances of graft failure\. The predictive performance of the SVM model, based on on donor age, UPCR, RBF and urine output, is summarized in Table 3\. The confusion matrix revealed an accuracy of 94\.03% \(95% CI, 85\.41%\-98\.35%\)\. The model demonstrated a sensitivity of 100% and a specificity of 88\.24%\. The PPV was 89\.19%, and the NPV was 100%, indicating the model's strength in accurately identifying functioning grafts\. The ROC AUC was 0\.914 \(95% CI, 0\.82\-1\.00\), suggesting a high level of model reliability and an capability in distinguishing between functioning and failed grafts under varied threshold settings \(Figure 1\)\.
+The transplant cohort was <a id="_Hlk175844248"></a><a id="_Hlk175844391"></a>oversampled to create a dataset comprised 34 instances of functioning graft and 33 instances of graft failure\.
+The predictive performance of the SVM model, based on on donor age, UPCR, RBF and urine output, is summarized in Table 3\.
+The confusion matrix revealed an accuracy of 94\.03% \(95% CI, 85\.41%\-98\.35%\)\.
+The model demonstrated a sensitivity of 100% and a specificity of 88\.24%\.
+The PPV was 89\.19%, and the NPV was 100%, indicating the model's strength in accurately identifying functioning grafts\.
+The ROC AUC was 0\.914 \(95% CI, 0\.82\-1\.00\), suggesting a high level of model reliability and an capability in distinguishing between functioning and failed grafts under varied threshold settings \(Figure 1\)\.
 
 __Discarded kidney series__
 
-The SVM model, trained to predict graft failure, was applied to the discarded kidney series\. Figure 2 shows the distribution of predicted probabilities of graft failure by the SVM model\. Ten kidneys were predicted to have<a id="_Hlk175844857"></a> a low probability of graft failure \(0\.16%\-11\.70%\), while 5 kidneys were predicted to have a high probability of graft failure \(16\.47%\-86\.73%\)\.
+The SVM model, trained to predict graft failure, was applied to the discarded kidney series\.
+Figure 2 shows the distribution of predicted probabilities of graft failure by the SVM model\.
+Ten kidneys were predicted to have<a id="_Hlk175844857"></a> a low probability of graft failure \(0\.16%\-11\.70%\), while 5 kidneys were predicted to have a high probability of graft failure \(16\.47%\-86\.73%\)\.
 
 __Renal function during NMP__
 
-The discarded kidneys were categorized into functioning and failure groups based on the SVM model predictions\. Compared to kidneys predicted to fail, those predicted to function demonstrated superior glomerular filtration \[CrCl at 120min: 4\.4 \(3\.4\-4\.9\) versus 0\.6 \(0\.5\-0\.7\) ml/min/100g, p=0\.002\], better tubular transportation \[TNa at 120min: 557\.9 \(462\.9\-681\.7\) versus 68\.3 \(50\.3\-78\.1\) mmol/min/100g, p=0\.003\], and higher oxygen utilization efficiency \[TNa/VO2 at 120min: 212\.5 \(173\.1\-244\.9\) versus \(41\.9\) mmolNa/mlO2, p<0\.001, Figure 3A\-C\]\. Kidneys in the functioning group also showed a trend of lower FENa, higher demand of oxygen, and urine output than those in the failure group \(Figure 3D\-F\)\.
+The discarded kidneys were categorized into functioning and failure groups based on the SVM model predictions\.
+Compared to kidneys predicted to fail, those predicted to function demonstrated superior glomerular filtration \[CrCl at 120min: 4\.4 \(3\.4\-4\.9\) versus 0\.6 \(0\.5\-0\.7\) ml/min/100g, p=0\.002\], better tubular transportation \[TNa at 120min: 557\.9 \(462\.9\-681\.7\) versus 68\.3 \(50\.3\-78\.1\) mmol/min/100g, p=0\.003\], and higher oxygen utilization efficiency \[TNa/VO2 at 120min: 212\.5 \(173\.1\-244\.9\) versus \(41\.9\) mmolNa/mlO2, p<0\.001, Figure 3A\-C\]\.
+Kidneys in the functioning group also showed a trend of lower FENa, higher demand of oxygen, and urine output than those in the failure group \(Figure 3D\-F\)\.
 
 __Renal injury measurement__
 
 As general injury markers, levels of LDH and AST were slightly higher in kidneys predicted to fail compared to those predicted to function \(Figure 3G, H\)\.
 
-Representative histopathological images are shown in Figure 4A\. Most kidneys exhibited mild to moderate injury across the five assessed criteria\. No significant differences in pathological changes were observed between the functioning and failure groups \(Figure 4B\)\. Detailed scores for each kidney are provided in Table S2\.
+Representative histopathological images are shown in Figure 4A\.
+Most kidneys exhibited mild to moderate injury across the five assessed criteria\.
+No significant differences in pathological changes were observed between the functioning and failure groups \(Figure 4B\)\.
+Detailed scores for each kidney are provided in Table S2\.
 
 __Discussion__
 
-We developed an SVM model based on donor characteristics and kidney NMP performance to predict graft status posttransplant\. When applied to a series of discarded kidneys, the model predicted that 67% of the initially declined kidneys would function if transplanted\. This prediction was further supported by superior renal function and viability observed during NMP\. Our findings may assist in decision\-making \(e\.g\. kidney transplantability\) and increase the utilization of marginal donor kidneys\.
+We developed an SVM model based on donor characteristics and kidney NMP performance to predict graft status posttransplant\.
+When applied to a series of discarded kidneys, the model predicted that 67% of the initially declined kidneys would function if transplanted\.
+This prediction was further supported by superior renal function and viability observed during NMP\.
+Our findings may assist in decision\-making \(e\.g\.
+kidney transplantability\) and increase the utilization of marginal donor kidneys\.
 
-Several studies have previously reported to predict graft outcomes using machine learning techniques or traditional regression models\. Naqvi et al\.16 developed a machine learning model based on 37 donor and recipient characteristics, using a large dataset of over 50000 kidney transplants, to predict allograft status\. Similarly, a risk prediction score \(iBox\) was developed using data from multiple international cohorts of 7557 participants, which achieved accurate calibration and discrimination in predicting long\-term graft failure \(C\-index 0\.81, 95% CI 0\.79 to 0\.83\)\.17 However, these models primarily rely on data obtained posttransplant, limiting their utility in assessing the transplantability of donor kidneys before transplantation occurs\.
+Several studies have previously reported to predict graft outcomes using machine learning techniques or traditional regression models\.
+Naqvi et al\.16 developed a machine learning model based on 37 donor and recipient characteristics, using a large dataset of over 50000 kidney transplants, to predict allograft status\.
+Similarly, a risk prediction score \(iBox\) was developed using data from multiple international cohorts of 7557 participants, which achieved accurate calibration and discrimination in predicting long\-term graft failure \(C\-index 0\.81, 95% CI 0\.79 to 0\.83\)\.17 However, these models primarily rely on data obtained posttransplant, limiting their utility in assessing the transplantability of donor kidneys before transplantation occurs\.
 
-Our approach differs by focusing on developing a prediction model that can determine a donor kidney’s suitability for transplantation before the procedure, potentially reducing the unnecessary discard of viable organs\. Similarly, Senanayake et al\.18 introduced a Cox regression model based on pretransplant donor and recipient characteristics, which achieved a C\-index of 0\.67 in discriminating death\-censored graft failure\. While their study aims to match eligible donor kidneys to the most suitable recipients, our rational is to identify functional donor kidneys that have been initially considered unsuitable for transplantation based on subjective assessments\.
+Our approach differs by focusing on developing a prediction model that can determine a donor kidney’s suitability for transplantation before the procedure, potentially reducing the unnecessary discard of viable organs\.
+Similarly, Senanayake et al\.18 introduced a Cox regression model based on pretransplant donor and recipient characteristics, which achieved a C\-index of 0\.67 in discriminating death\-censored graft failure\.
+While their study aims to match eligible donor kidneys to the most suitable recipients, our rational is to identify functional donor kidneys that have been initially considered unsuitable for transplantation based on subjective assessments\.
 
-In the training set consisting of 41 kidney NMP and transplanttaion cases, our SVM model correctly identified all graft failure cases and majority of the functioning kidneys\. In the test set, we identified 10 of the initially discarded kidneys as potentially eligible for transplantation, all of which were classified as AKI stage I \(n = 5\) or II \(n = 5\)\. AKI kidneys are discarded at a significantly higher rate than those without AKI due to concerns about acute rejection and risks of graft failure\.19\-22 However, research from diverse data sources has shown that recipients of AKI kidneys can achieve long\-term graft survival comparable to that of non\-AKI kidneys\.23\-29 Reese et al\. found no significant associations between donor\-derived AKI and biopsy\-proven acute rejection, suggesting that immunological complications can be successfully managed in AKI\-affected kidneys\.23 Liu et al\. examined a national US cohort of 6722 deceased donors with AKI and found that although AKI kidneys were more likely to develop DGF, their graft survival rates were comparable to those of non\-AKI kidneys\.24 Boffa et al\. reported that PNF rates were only significantly higher for AKI stage III kidneys\.28 This implies that discarding kidneys from donors with AKI, especially those with stage I or II, may be unwarranted, and these kidneys could contribute positively to the donor pool\.
+In the training set consisting of 41 kidney NMP and transplanttaion cases, our SVM model correctly identified all graft failure cases and majority of the functioning kidneys\.
+In the test set, we identified 10 of the initially discarded kidneys as potentially eligible for transplantation, all of which were classified as AKI stage I \(n = 5\) or II \(n = 5\)\.
+AKI kidneys are discarded at a significantly higher rate than those without AKI due to concerns about acute rejection and risks of graft failure\.19\-22 However, research from diverse data sources has shown that recipients of AKI kidneys can achieve long\-term graft survival comparable to that of non\-AKI kidneys\.23\-29 Reese et al\.
+found no significant associations between donor\-derived AKI and biopsy\-proven acute rejection, suggesting that immunological complications can be successfully managed in AKI\-affected kidneys\.23 Liu et al\.
+examined a national US cohort of 6722 deceased donors with AKI and found that although AKI kidneys were more likely to develop DGF, their graft survival rates were comparable to those of non\-AKI kidneys\.24 Boffa et al\.
+reported that PNF rates were only significantly higher for AKI stage III kidneys\.28 This implies that discarding kidneys from donors with AKI, especially those with stage I or II, may be unwarranted, and these kidneys could contribute positively to the donor pool\.
 
-Another practical question is identifying suitable transplant candidates for marginal kidneys\. Some studies recommend allocating these kidneys to older candidates to better match the life expectancy of organs and recipients, which has been successfully implemented by the Eurotransplant Senior program and demonstrated favorable 5\-year outcomes\.30 On the other hand, Bae and colleagues31 used a random forests algorithm to predict posttransplant graft survival based on the Kidney Donor Profile Index \(KDPI\) and Estimated Post\-Transplant Survival \(EPTS\)\. Their findings show that KDPI has minimal impact among candidates with low EPTS, suggesting that candidates in good overall condition \(e\.g\., with less dialysis time\) can better tolerate the marginal graft function expected with a lower\-quality allograft\. The most important is that the individual candidate would obtain survival benefit from kidney transplantation with a marginal kidney\. Candidate’s own perspectives on how much survival benefit is sufficient to justify the surgical stress, life\-long immunosuppression, and financial burden associated should be considered\.31
+Another practical question is identifying suitable transplant candidates for marginal kidneys\.
+Some studies recommend allocating these kidneys to older candidates to better match the life expectancy of organs and recipients, which has been successfully implemented by the Eurotransplant Senior program and demonstrated favorable 5\-year outcomes\.30 On the other hand, Bae and colleagues31 used a random forests algorithm to predict posttransplant graft survival based on the Kidney Donor Profile Index \(KDPI\) and Estimated Post\-Transplant Survival \(EPTS\)\.
+Their findings show that KDPI has minimal impact among candidates with low EPTS, suggesting that candidates in good overall condition \(e\.g\., with less dialysis time\) can better tolerate the marginal graft function expected with a lower\-quality allograft\.
+The most important is that the individual candidate would obtain survival benefit from kidney transplantation with a marginal kidney\.
+Candidate’s own perspectives on how much survival benefit is sufficient to justify the surgical stress, life\-long immunosuppression, and financial burden associated should be considered\.31
 
-Currently, our SVM model relies on one\-hour perfusion parameters\. The optimal duration for kidney NMP remains unclear\. Although studies have explored the feasibility of normothermic preservation for up to 24 or 48 hours, prolonged NMP may induce endothelial injury, resulting in adverse consequences after transplantation\.32\-34 Therefore, a one\-hour NMP duration might be acceptable for determining a kidney’s suitability for transplantation, considering the potential risks of injury and current clinical practice\.35\-37 However, we anticipate that with continuous advancements in machine perfusion technology, NMP may not only assess organ quality but also recondition and repair the organ\. Marginal kidneys are likely to benefit from extended preservation with therapeutic interventions\. Further research is warranted to investigate the necessity of prolonged NMP for organ quality assessment and its potential in improving organ quality\.
+Currently, our SVM model relies on one\-hour perfusion parameters\.
+The optimal duration for kidney NMP remains unclear\.
+Although studies have explored the feasibility of normothermic preservation for up to 24 or 48 hours, prolonged NMP may induce endothelial injury, resulting in adverse consequences after transplantation\.32\-34 Therefore, a one\-hour NMP duration might be acceptable for determining a kidney’s suitability for transplantation, considering the potential risks of injury and current clinical practice\.35\-37 However, we anticipate that with continuous advancements in machine perfusion technology, NMP may not only assess organ quality but also recondition and repair the organ\.
+Marginal kidneys are likely to benefit from extended preservation with therapeutic interventions\.
+Further research is warranted to investigate the necessity of prolonged NMP for organ quality assessment and its potential in improving organ quality\.
 
-Our study has some limitations to be addressed\. Firstly, the study is limited by its reliance on data from single center with a small group size, which restricts the variables that are included in the prediction model and the generalizability of our findings\. A larger and multi\-center cohort could enhance the validity of our prediction model\. Secondly, we used experimental validation since the discarded kidneys were not intended for transplantation, which limits the robustness of our findings\. Thirdly, we were only able to predict binary outcomes \(graft failure or not\) within a relatively short period and were unable to predict time\-to\-event \(survival\) outcomes\.
+Our study has some limitations to be addressed\.
+Firstly, the study is limited by its reliance on data from single center with a small group size, which restricts the variables that are included in the prediction model and the generalizability of our findings\.
+A larger and multi\-center cohort could enhance the validity of our prediction model\.
+Secondly, we used experimental validation since the discarded kidneys were not intended for transplantation, which limits the robustness of our findings\.
+Thirdly, we were only able to predict binary outcomes \(graft failure or not\) within a relatively short period and were unable to predict time\-to\-event \(survival\) outcomes\.
 
 __Conclusion__
 
-Our study introduced an NMP\-based SVM model to predict graft outcomes after kidney transplantation\. Although none of these discarded kidneys were transplanted, the data suggest that 67% of these kidneys should be considered for transplantation\.
+Our study introduced an NMP\-based SVM model to predict graft outcomes after kidney transplantation\.
+Although none of these discarded kidneys were transplanted, the data suggest that 67% of these kidneys should be considered for transplantation\.
 
 __Acknowledgement__
 
-The authors thank the donors and their families for their permission and trust in the use of discarded donor kidneys for research purposes, and F\. Tafreshian, J\. de Nooijer and M\. van Veen from the EMC TrialLab for the help on the perfusate analyses\.
+The authors thank the donors and their families for their permission and trust in the use of discarded donor kidneys for research purposes, and F\.
+Tafreshian, J\.
+de Nooijer and M\.
+van Veen from the EMC TrialLab for the help on the perfusate analyses\.
 
 __References__
 
-1\.	Tonelli M, Wiebe N, Knoll G, et al\. Systematic review: kidney transplantation compared with dialysis in clinically relevant outcomes\. *Am J Transplant*\. Oct 2011;11\(10\):2093\-109\. 
+1\.
+Tonelli M, Wiebe N, Knoll G, et al\.
+Systematic review: kidney transplantation compared with dialysis in clinically relevant outcomes\.
+*Am J Transplant*\.
+Oct 2011;11\(10\):2093\-109\.
 
-2\.	Port FK, Bragg\-Gresham JL, Metzger RA, et al\. Donor characteristics associated with reduced graft survival: an approach to expanding the pool of kidney donors\. *Transplantation*\. Nov 15 2002;74\(9\):1281\-6\. 
+2\.
+Port FK, Bragg\-Gresham JL, Metzger RA, et al\.
+Donor characteristics associated with reduced graft survival: an approach to expanding the pool of kidney donors\.
+*Transplantation*\.
+Nov 15 2002;74\(9\):1281\-6\.
 
-3\.	Lomero M, Gardiner D, Coll E, et al\. Donation after circulatory death today: an updated overview of the European landscape\. *Transpl Int*\. Jan 2020;33\(1\):76\-88\. 
+3\.
+Lomero M, Gardiner D, Coll E, et al\.
+Donation after circulatory death today: an updated overview of the European landscape\.
+*Transpl Int*\.
+Jan 2020;33\(1\):76\-88\.
 
-4\.	Hamed MO, Chen Y, Pasea L, et al\. Early graft loss after kidney transplantation: risk factors and consequences\. *Am J Transplant*\. Jun 2015;15\(6\):1632\-43\. 
+4\.
+Hamed MO, Chen Y, Pasea L, et al\.
+Early graft loss after kidney transplantation: risk factors and consequences\.
+*Am J Transplant*\.
+Jun 2015;15\(6\):1632\-43\.
 
-5\.	Schutter R, Vrijlandt WAL, Weima GM, et al\. Kidney utilization in the Netherlands \- do we optimally use our donor organs? *Nephrol Dial Transplant*\. Feb 28 2023;38\(3\):787\-796\. 
+5\.
+Schutter R, Vrijlandt WAL, Weima GM, et al\.
+Kidney utilization in the Netherlands \- do we optimally use our donor organs? *Nephrol Dial Transplant*\.
+Feb 28 2023;38\(3\):787\-796\.
 
-6\.	Hosgood SA, Barlow AD, Hunter JP, Nicholson ML\. Ex vivo normothermic perfusion for quality assessment of marginal donor kidney transplants\. *Br J Surg*\. Oct 2015;102\(11\):1433\-40\. 
+6\.
+Hosgood SA, Barlow AD, Hunter JP, Nicholson ML\.
+Ex vivo normothermic perfusion for quality assessment of marginal donor kidney transplants\.
+*Br J Surg*\.
+Oct 2015;102\(11\):1433\-40\.
 
-7\.	Hosgood SA, Thompson E, Moore T, Wilson CH, Nicholson ML\. Normothermic machine perfusion for the assessment and transplantation of declined human kidneys from donation after circulatory death donors\. *Br J Surg*\. Mar 2018;105\(4\):388\-394\. 
+7\.
+Hosgood SA, Thompson E, Moore T, Wilson CH, Nicholson ML\.
+Normothermic machine perfusion for the assessment and transplantation of declined human kidneys from donation after circulatory death donors\.
+*Br J Surg*\.
+Mar 2018;105\(4\):388\-394\.
 
-8\.	Brown TS, Elster EA, Stevens K, et al\. Bayesian modeling of pretransplant variables accurately predicts kidney graft survival\. *Am J Nephrol*\. 2012;36\(6\):561\-9\. 
+8\.
+Brown TS, Elster EA, Stevens K, et al\.
+Bayesian modeling of pretransplant variables accurately predicts kidney graft survival\.
+*Am J Nephrol*\.
+2012;36\(6\):561\-9\.
 
-9\.	Nematollahi M, Akbari R, Nikeghbalian S, Salehnasab C\. Classification Models to Predict Survival of Kidney Transplant Recipients Using Two Intelligent Techniques of Data Mining and Logistic Regression\. *Int J Organ Transplant Med*\. 2017;8\(2\):119\-122\. 
+9\.
+Nematollahi M, Akbari R, Nikeghbalian S, Salehnasab C\.
+Classification Models to Predict Survival of Kidney Transplant Recipients Using Two Intelligent Techniques of Data Mining and Logistic Regression\.
+*Int J Organ Transplant Med*\.
+2017;8\(2\):119\-122\.
 
-10\.	Aksoy GK, Akcay HG, Ari C, et al\. Predicting graft survival in paediatric kidney transplant recipients using machine learning\. *Pediatr Nephrol*\. Aug 16 2024;
+10\.
+Aksoy GK, Akcay HG, Ari C, et al\.
+Predicting graft survival in paediatric kidney transplant recipients using machine learning\.
+*Pediatr Nephrol*\.
+Aug 16 2024;
 
-11\.	Badrouchi S, Bacha MM, Ahmed A, Ben Abdallah T, Abderrahim E\. Predicting long\-term outcomes of kidney transplantation in the era of artificial intelligence\. *Sci Rep*\. Dec 2 2023;13\(1\):21273\. 
+11\.
+Badrouchi S, Bacha MM, Ahmed A, Ben Abdallah T, Abderrahim E\.
+Predicting long\-term outcomes of kidney transplantation in the era of artificial intelligence\.
+*Sci Rep*\.
+Dec 2 2023;13\(1\):21273\.
 
-12\.	Winters\-Hilt S, Yelundur A, McChesney C, Landry M\. Support vector machine implementations for classification & clustering\. *BMC Bioinformatics*\. Sep 6 2006;7 Suppl 2\(Suppl 2\):S4\. 
+12\.
+Winters\-Hilt S, Yelundur A, McChesney C, Landry M\.
+Support vector machine implementations for classification & clustering\.
+*BMC Bioinformatics*\.
+Sep 6 2006;7 Suppl 2\(Suppl 2\):S4\.
 
-13\.	Rijkse E, de Jonge J, Kimenai H, et al\. Safety and feasibility of 2 h of normothermic machine perfusion of donor kidneys in the Eurotransplant Senior Program\. *BJS Open*\. Jan 8 2021;5\(1\)
+13\.
+Rijkse E, de Jonge J, Kimenai H, et al\.
+Safety and feasibility of 2 h of normothermic machine perfusion of donor kidneys in the Eurotransplant Senior Program\.
+*BJS Open*\.
+Jan 8 2021;5\(1\)
 
-14\.	Fang YT, van Ooijen L, Ambagtsheer G, et al\. Real\-time laser speckle contrast imaging measurement during normothermic machine perfusion in pretransplant kidney assessment\. *Laser Surg Med*\. Oct 2023;55\(8\):784\-793\. 
+14\.
+Fang YT, van Ooijen L, Ambagtsheer G, et al\.
+Real\-time laser speckle contrast imaging measurement during normothermic machine perfusion in pretransplant kidney assessment\.
+*Laser Surg Med*\.
+Oct 2023;55\(8\):784\-793\.
 
-15\.	Roufosse C, Simmonds N, Clahsen\-van Groningen M, et al\. A 2018 Reference Guide to the Banff Classification of Renal Allograft Pathology\. *Transplantation*\. Nov 2018;102\(11\):1795\-1814\. 
+15\.
+Roufosse C, Simmonds N, Clahsen\-van Groningen M, et al\.
+A 2018 Reference Guide to the Banff Classification of Renal Allograft Pathology\.
+*Transplantation*\.
+Nov 2018;102\(11\):1795\-1814\.
 
-16\.	Naqvi SAA, Tennankore K, Vinson A, Roy PC, Abidi SSR\. Predicting Kidney Graft Survival Using Machine Learning Methods: Prediction Model Development and Feature Significance Analysis Study\. *J Med Internet Res*\. Aug 27 2021;23\(8\):e26843\. 
+16\.
+Naqvi SAA, Tennankore K, Vinson A, Roy PC, Abidi SSR\.
+Predicting Kidney Graft Survival Using Machine Learning Methods: Prediction Model Development and Feature Significance Analysis Study\.
+*J Med Internet Res*\.
+Aug 27 2021;23\(8\):e26843\.
 
-17\.	Loupy A, Aubert O, Orandi BJ, et al\. Prediction system for risk of allograft loss in patients receiving kidney transplants: international derivation and validation study\. *BMJ*\. Sep 17 2019;366:l4923\. 
+17\.
+Loupy A, Aubert O, Orandi BJ, et al\.
+Prediction system for risk of allograft loss in patients receiving kidney transplants: international derivation and validation study\.
+*BMJ*\.
+Sep 17 2019;366:l4923\.
 
-18\.	Senanayake S, Kularatna S, Healy H, et al\. Development and validation of a risk index to predict kidney graft survival: the kidney transplant risk index\. *BMC Med Res Methodol*\. Jun 21 2021;21\(1\):127\. 
+18\.
+Senanayake S, Kularatna S, Healy H, et al\.
+Development and validation of a risk index to predict kidney graft survival: the kidney transplant risk index\.
+*BMC Med Res Methodol*\.
+Jun 21 2021;21\(1\):127\.
 
-19\.	Land WG\. The role of postischemic reperfusion injury and other nonantigen\-dependent inflammatory pathways in transplantation\. *Transplantation*\. Mar 15 2005;79\(5\):505\-14\. 
+19\.
+Land WG\.
+The role of postischemic reperfusion injury and other nonantigen\-dependent inflammatory pathways in transplantation\.
+*Transplantation*\.
+Mar 15 2005;79\(5\):505\-14\.
 
-20\.	Jang HR, Rabb H\. The innate immune response in ischemic acute kidney injury\. *Clin Immunol*\. Jan 2009;130\(1\):41\-50\. 
+20\.
+Jang HR, Rabb H\.
+The innate immune response in ischemic acute kidney injury\.
+*Clin Immunol*\.
+Jan 2009;130\(1\):41\-50\.
 
-21\.	Singbartl K, Formeck CL, Kellum JA\. Kidney\-Immune System Crosstalk in AKI\. *Semin Nephrol*\. Jan 2019;39\(1\):96\-106\. 
+21\.
+Singbartl K, Formeck CL, Kellum JA\.
+Kidney\-Immune System Crosstalk in AKI\.
+*Semin Nephrol*\.
+Jan 2019;39\(1\):96\-106\.
 
-22\.	Hall IE, Schroppel B, Doshi MD, et al\. Associations of deceased donor kidney injury with kidney discard and function after transplantation\. *Am J Transplant*\. Jun 2015;15\(6\):1623\-31\. 
+22\.
+Hall IE, Schroppel B, Doshi MD, et al\.
+Associations of deceased donor kidney injury with kidney discard and function after transplantation\.
+*Am J Transplant*\.
+Jun 2015;15\(6\):1623\-31\.
 
-23\.	Reese PP, Doshi MD, Hall IE, et al\. Deceased\-Donor Acute Kidney Injury and Acute Rejection in Kidney Transplant Recipients: A Multicenter Cohort\. *Am J Kidney Dis*\. Feb 2023;81\(2\):222\-231 e1\. 
+23\.
+Reese PP, Doshi MD, Hall IE, et al\.
+Deceased\-Donor Acute Kidney Injury and Acute Rejection in Kidney Transplant Recipients: A Multicenter Cohort\.
+*Am J Kidney Dis*\.
+Feb 2023;81\(2\):222\-231 e1\.
 
-24\.	Liu C, Hall IE, Mansour S, Thiessen Philbrook HR, Jia Y, Parikh CR\. Association of Deceased Donor Acute Kidney Injury With Recipient Graft Survival\. *JAMA Netw Open*\. Jan 3 2020;3\(1\):e1918634\. 
+24\.
+Liu C, Hall IE, Mansour S, Thiessen Philbrook HR, Jia Y, Parikh CR\.
+Association of Deceased Donor Acute Kidney Injury With Recipient Graft Survival\.
+*JAMA Netw Open*\.
+Jan 3 2020;3\(1\):e1918634\.
 
-25\.	Sonnenberg EM, Hsu JY, Cohen JB, et al\. Acute Kidney Injury in Deceased Organ Donors and Kidney Transplant Outcomes: A National Cohort Study Using a Novel Data Source\. *Ann Surg*\. Dec 1 2022;276\(6\):e982\-e990\. 
+25\.
+Sonnenberg EM, Hsu JY, Cohen JB, et al\.
+Acute Kidney Injury in Deceased Organ Donors and Kidney Transplant Outcomes: A National Cohort Study Using a Novel Data Source\.
+*Ann Surg*\.
+Dec 1 2022;276\(6\):e982\-e990\.
 
-26\.	Heilman RL, Smith ML, Smith BH, et al\. Long\-term Outcomes Following Kidney Transplantation From Donors With Acute Kidney Injury\. *Transplantation*\. Sep 2019;103\(9\):e263\-e272\. 
+26\.
+Heilman RL, Smith ML, Smith BH, et al\.
+Long\-term Outcomes Following Kidney Transplantation From Donors With Acute Kidney Injury\.
+*Transplantation*\.
+Sep 2019;103\(9\):e263\-e272\.
 
-27\.	Hall IE, Akalin E, Bromberg JS, et al\. Deceased\-donor acute kidney injury is not associated with kidney allograft failure\. *Kidney Int*\. Jan 2019;95\(1\):199\-209\. 
+27\.
+Hall IE, Akalin E, Bromberg JS, et al\.
+Deceased\-donor acute kidney injury is not associated with kidney allograft failure\.
+*Kidney Int*\.
+Jan 2019;95\(1\):199\-209\.
 
-28\.	Boffa C, van de Leemkolk F, Curnow E, et al\. Transplantation of Kidneys From Donors With Acute Kidney Injury: Friend or Foe? *Am J Transplant*\. Feb 2017;17\(2\):411\-419\. 
+28\.
+Boffa C, van de Leemkolk F, Curnow E, et al\.
+Transplantation of Kidneys From Donors With Acute Kidney Injury: Friend or Foe? *Am J Transplant*\.
+Feb 2017;17\(2\):411\-419\.
 
-29\.	Klein R, Galante NZ, de Sandes\-Freitas TV, de Franco MF, Tedesco\-Silva H, Medina\-Pestana JO\. Transplantation with kidneys retrieved from deceased donors with acute renal failure\. *Transplantation*\. Feb 27 2013;95\(4\):611\-6\. 
+29\.
+Klein R, Galante NZ, de Sandes\-Freitas TV, de Franco MF, Tedesco\-Silva H, Medina\-Pestana JO\.
+Transplantation with kidneys retrieved from deceased donors with acute renal failure\.
+*Transplantation*\.
+Feb 27 2013;95\(4\):611\-6\.
 
-30\.	Frei U, Noeldeke J, Machold\-Fabrizii V, et al\. Prospective age\-matching in elderly kidney transplant recipients\-\-a 5\-year analysis of the Eurotransplant Senior Program\. *Am J Transplant*\. Jan 2008;8\(1\):50\-7\. 
+30\.
+Frei U, Noeldeke J, Machold\-Fabrizii V, et al\.
+Prospective age\-matching in elderly kidney transplant recipients\-\-a 5\-year analysis of the Eurotransplant Senior Program\.
+*Am J Transplant*\.
+Jan 2008;8\(1\):50\-7\.
 
-31\.	Bae S, Massie AB, Thomas AG, et al\. Who can tolerate a marginal kidney? Predicting survival after deceased donor kidney transplant by donor\-recipient combination\. *American Journal of Transplantation*\. Feb 2019;19\(2\):425\-433\. 
+31\.
+Bae S, Massie AB, Thomas AG, et al\.
+Who can tolerate a marginal kidney? Predicting survival after deceased donor kidney transplant by donor\-recipient combination\.
+*American Journal of Transplantation*\.
+Feb 2019;19\(2\):425\-433\.
 
-32\.	Weissenbacher A, Lo Faro L, Boubriak O, et al\. Twenty\-four\-hour normothermic perfusion of discarded human kidneys with urine recirculation\. *Am J Transplant*\. Jan 2019;19\(1\):178\-192\. 
+32\.
+Weissenbacher A, Lo Faro L, Boubriak O, et al\.
+Twenty\-four\-hour normothermic perfusion of discarded human kidneys with urine recirculation\.
+*Am J Transplant*\.
+Jan 2019;19\(1\):178\-192\.
 
-33\.	Weissenbacher A, Messner F, Gasteiger S, Soleiman A, Ofner D, Schneeberger S\. Forty\-eight hours of normothermic kidney preservation applying urine recirculation\. *Artif Organs*\. Apr 2022;46\(4\):710\-714\. 
+33\.
+Weissenbacher A, Messner F, Gasteiger S, Soleiman A, Ofner D, Schneeberger S\.
+Forty\-eight hours of normothermic kidney preservation applying urine recirculation\.
+*Artif Organs*\.
+Apr 2022;46\(4\):710\-714\.
 
-34\.	Huijink TM, van 't Hof CJ, van Furth LA, et al\. Loss of Endothelial Glycocalyx During Normothermic Machine Perfusion of Porcine Kidneys Irrespective of Pressure and Hematocrit\. *Transplant Direct*\. Aug 2023;9\(8\):e1507\. 
+34\.
+Huijink TM, van 't Hof CJ, van Furth LA, et al\.
+Loss of Endothelial Glycocalyx During Normothermic Machine Perfusion of Porcine Kidneys Irrespective of Pressure and Hematocrit\.
+*Transplant Direct*\.
+Aug 2023;9\(8\):e1507\.
 
-35\.	Rijkse E, de Jonge J, Kimenai HJAN, et al\. Safety and feasibility of 2 h of normothermic machine perfusion of donor kidneys in the Eurotransplant Senior Program\. *Bjs Open*\. Jan 2021;5\(1\)
+35\.
+Rijkse E, de Jonge J, Kimenai HJAN, et al\.
+Safety and feasibility of 2 h of normothermic machine perfusion of donor kidneys in the Eurotransplant Senior Program\.
+*Bjs Open*\.
+Jan 2021;5\(1\)
 
-36\.	Mazilescu LI, Urbanellis P, Kim SJ, et al\. Normothermic Ex Vivo Kidney Perfusion for Human Kidney Transplantation: First North American Results\. *Transplantation*\. Sep 1 2022;106\(9\):1852\-1859\. 
+36\.
+Mazilescu LI, Urbanellis P, Kim SJ, et al\.
+Normothermic Ex Vivo Kidney Perfusion for Human Kidney Transplantation: First North American Results\.
+*Transplantation*\.
+Sep 1 2022;106\(9\):1852\-1859\.
 
-37\.	Hosgood SA, Callaghan CJ, Wilson CH, et al\. Normothermic machine perfusion versus static cold storage in donation after circulatory death kidney transplantation: a randomized controlled trial\. *Nat Med*\. Jun 2023;29\(6\):1511\-1519\. 
+37\.
+Hosgood SA, Callaghan CJ, Wilson CH, et al\.
+Normothermic machine perfusion versus static cold storage in donation after circulatory death kidney transplantation: a randomized controlled trial\.
+*Nat Med*\.
+Jun 2023;29\(6\):1511\-1519\.
 
-Table 1\. Donor and recipient characteristics in clinical transplant series
+<!--
+ERROR: the paragraph below could not be revised with the AI model due to the following error:
+
+The model `gpt-4-turbo` does not exist or you do not have access to it.
+-->
+Table 1\.
+Donor and recipient characteristics in clinical transplant series
 
 __Donor \(N = 41\)__
 
-  Age \(year\)
+Age \(year\)
 
 65 \[58\-72\]
 
-  Sex, male
+Sex, male
 
 31 \(76%\)
 
-  Cause of death
+Cause of death
 
-    CVA
+CVA
 
 16 \(39%\)
 
-    Trauma
+Trauma
 
 7 \(17%\)
 
-    Cardiac arrest
+Cardiac arrest
 
 14 \(34%\)
 
-    Others
+Others
 
 4 \(10%\)
 
-  Donor type
+Donor type
 
-    DCD
+DCD
 
 30 \(73%\)
 
-    DBD
+DBD
 
 11 \(27%\)
 
-  Terminal serum creatinine \(μmol/l\)
+Terminal serum creatinine \(μmol/l\)
 
 64 \[55\-94\]
 
-  Urinary protein \(g/l\)
+Urinary protein \(g/l\)
 
 0\.21 \[0\.11\-0\.38\]
 
-  UPCR \(mg/mmol\)
+UPCR \(mg/mmol\)
 
 24\.3 \[18\.6\-36\.1\]
 
-  First WIT \(minutes\)\*
+First WIT \(minutes\)\*
 
 16 \[13\-18\]
 
 __Recipient \(N = 41\)__
 
-  Age \(year\)
+Age \(year\)
 
 67 \[60\-72\]
 
-  Sex, male
+Sex, male
 
 30 \(73%\)
 
-  HLA mismatches
+HLA mismatches
 
-    0\-1
+0\-1
 
 4 \(10%\)
 
-    2\-4
+2\-4
 
 22 \(54%\)
 
-    5\-6
+5\-6
 
 15 \(37%\)
 
-  CIT \(hours\)
+CIT \(hours\)
 
 9\.5 \[7\.1\-11\.6\]
 
-  Second WIT \(minutes\)
+Second WIT \(minutes\)
 
 20 \[17\-25\]
 
 __Perfusion metrics__
 
-  1h RBF \(ml/min/100g\)
+1h RBF \(ml/min/100g\)
 
 186 \[149\-221\]
 
-  2h RBF \(ml/min/100g\)
+2h RBF \(ml/min/100g\)
 
 210 \[151\-263\]
 
-  1h urine output \(ml/100g\)
+1h urine output \(ml/100g\)
 
 62 \[28\-110\]
 
-  2h urine output \(ml/100g\)
+2h urine output \(ml/100g\)
 
 78 \[38\-174\]
 
-Descriptive statistics use median \[IQR\] for continuous variables and numbers \(%\) for discrete variables\. CIT, cold ischemia time; CVA, cerebrovascular accident; DBD, donation after brain death; DCD, donation after circulatory death; HLA, human leukocyte antigens; RBF, renal blood flow; UPCR, urine protein creatinine ratio; WIT, warm ischemia time\.
+
+Descriptive statistics use median \[IQR\] for continuous variables and numbers \(%\) for discrete variables\.
+CIT, cold ischemia time; CVA, cerebrovascular accident; DBD, donation after brain death; DCD, donation after circulatory death; HLA, human leukocyte antigens; RBF, renal blood flow; UPCR, urine protein creatinine ratio; WIT, warm ischemia time\.
 
 \*Only applicable for DCD donors\.
 
-Table 2\. Donor characteristics in the discarded human kidney series \(N = 15\)
+Table 2\.
+Donor characteristics in the discarded human kidney series \(N = 15\)
 
 Age \(year\)
 
@@ -308,29 +563,29 @@ Sex, male
 
 Cause of death
 
-  CVA
+CVA
 
 5 \(33%\)
 
-  Trauma
+Trauma
 
 4 \(27%\)
 
-  Cardiac arrest
+Cardiac arrest
 
 4 \(27%\)
 
-  Others
+Others
 
 2 \(13%\)
 
 Donor type
 
-  DCD
+DCD
 
 7 \(47%\)
 
-  DBD
+DBD
 
 8 \(53%\)
 
@@ -348,15 +603,15 @@ UPCR \(mg/mmol\)
 
 AKI classification
 
-  I
+I
 
 8 \(53%\)
 
-  II
+II
 
 6 \(40%\)
 
-  III
+III
 
 1 \(7%\)
 
@@ -370,27 +625,29 @@ CIT \(hours\)
 
 __Perfusion metrics__
 
-  1h RBF \(ml/min/100g\)
+1h RBF \(ml/min/100g\)
 
 177 \[140\-189\]
 
-  2h RBF \(ml/min/100g\)
+2h RBF \(ml/min/100g\)
 
 201 \[163\-225\]
 
-  1h urine output \(ml/100g\)
+1h urine output \(ml/100g\)
 
 12 \[7\-23\]
 
-  2h urine output \(ml/100g\)
+2h urine output \(ml/100g\)
 
 23 \[14\-40\]
 
-Descriptive statistics use median \[IQR\] for continuous variables and numbers \(%\) for discrete variables\. AKI, acute kidney injury; CIT, cold ischemia time; CVA, cerebrovascular accident; DBD, donation after brain death; DCD, donation after circulatory death; UPCR, urine protein creatinine ratio; WIT, warm ischemia time\.
+Descriptive statistics use median \[IQR\] for continuous variables and numbers \(%\) for discrete variables\.
+AKI, acute kidney injury; CIT, cold ischemia time; CVA, cerebrovascular accident; DBD, donation after brain death; DCD, donation after circulatory death; UPCR, urine protein creatinine ratio; WIT, warm ischemia time\.
 
 \* Only applicable for DCD donors\.
 
-Table 3\. Diagnostic performance of the SVM model to predict graft failure based on NMP parameters
+Table 3\.
+Diagnostic performance of the SVM model to predict graft failure based on NMP parameters
 
 Metrics
 
